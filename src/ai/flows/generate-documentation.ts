@@ -1,4 +1,3 @@
-// src/ai/flows/generate-documentation.ts
 'use server';
 /**
  * @fileOverview A code documentation generator AI agent.

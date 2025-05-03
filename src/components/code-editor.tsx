@@ -1,62 +1,62 @@
-"use client";
-
-import React, {useEffect, useRef} from 'react';
-import MonacoEditor, {EditorDidMount, IEditorProps} from '@monaco-editor/react';
+import React, { useEffect, useRef } from 'react';
+import MonacoEditor, { OnMount, EditorProps } from '@monaco-editor/react';
 
 interface CodeEditorProps {
   value: string;
   onChange: (value: string) => void;
   language?: string;
-  options?: IEditorProps["options"];
+  options?: EditorProps['options'];
+  className?: string;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({value, onChange, language = 'javascript', options}) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({
+  value,
+  onChange,
+  language = 'javascript',
+  options,
+  className = '',
+}) => {
   const editorRef = useRef<any>(null);
 
   useEffect(() => {
-    // Fix: Resize observer loop limit reached
-    // https://github.com/react-monaco-editor/react-monaco-editor/issues/341
     const handleResize = () => {
-      if (editorRef.current) {
-        editorRef.current.layout();
-      }
+      editorRef.current?.layout();
     };
 
     window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleEditorDidMount: EditorDidMount = (editor, monaco) => {
+  const handleEditorMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
   };
 
-  const handleEditorChange = (newValue: string | undefined) => {
-    if (newValue !== undefined) {
-      onChange(newValue);
-    }
+  const handleEditorChange: EditorProps['onChange'] = (value) => {
+    if (value !== undefined) onChange(value);
   };
 
   return (
-    <MonacoEditor
-      width="100%"
-      height="100%"
-      language={language}
-      value={value}
-      options={{
-        selectOnLineNumbers: true,
-        roundedSelection: false,
-        readOnly: false,
-        cursorStyle: 'line',
-        automaticLayout: true,
-        theme: 'vs-dark',
-        ...options,
-      }}
-      onChange={handleEditorChange}
-      editorDidMount={handleEditorDidMount}
-    />
+    <div className={`w-full h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] ${className}`}>  
+      <MonacoEditor
+        className="border rounded-lg overflow-hidden"
+        width="100%"
+        height="100%"
+        language={language}
+        value={value}
+        options={{
+          selectOnLineNumbers: true,
+          roundedSelection: false,
+          readOnly: false,
+          cursorStyle: 'line',
+          automaticLayout: true,
+          theme: 'vs-dark',
+          fontSize: 14,
+          ...options,
+        }}
+        onMount={handleEditorMount}
+        onChange={handleEditorChange}
+      />
+    </div>
   );
 };
 
