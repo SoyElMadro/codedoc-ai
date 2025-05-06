@@ -45,11 +45,10 @@ Este proyecto está construido con las siguientes tecnologías:
 
 ## **🚀 Uso en Línea**  
 
-1. Accede al proyecto en su página publicada: [Codedoc AI](https://codedoc-ai.vercel.app) (asegúrate de reemplazar la URL por la correcta si es diferente). 🌍
-2. Carga tu código fuente en la aplicación usando el formulario de carga disponible. 📤
-3. Configura las opciones de personalización de la documentación, si lo deseas. ⚙️
-4. Haz clic en **"Generar Documentación"** y espera a que Gemini AI procese el código y genere la documentación. 🧠
-5. Descarga o visualiza la documentación generada directamente desde la interfaz. 📥
+1. Accede al proyecto en su página publicada: [Codedoc AI](https://codedoc-ai.vercel.app). 🌍
+2. Carga tu código fuente en la aplicación usando el apartado de código. 📤
+3. Haz clic en **"Generar Documentación"** y espera a que Gemini AI procese el código y genere la documentación. 🧠
+4. Descarga o visualiza la documentación generada directamente desde la interfaz. 📥
 
 ---
 
