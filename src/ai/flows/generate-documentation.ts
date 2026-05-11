@@ -16,7 +16,7 @@ const GenerateDocumentationInputSchema = z.object({
 export type GenerateDocumentationInput = z.infer<typeof GenerateDocumentationInputSchema>;
 
 const GenerateDocumentationOutputSchema = z.object({
-  documentation: z.string().describe('The generated documentation for the code.'),
+  documentation: z.string().describe('The generated markdown documentation.'),
 });
 export type GenerateDocumentationOutput = z.infer<typeof GenerateDocumentationOutputSchema>;
 
@@ -36,7 +36,18 @@ const prompt = ai.definePrompt({
       documentation: z.string().describe('The generated documentation for the code.'),
     }),
   },
-  prompt: `You are a documentation generator. Generate documentation for the following code:\n\n{{code}}`,
+  prompt: `
+You are an expert software documentation generator.
+
+Analyze the provided code and generate:
+- A clear explanation
+- Function descriptions
+- Parameter descriptions
+- Return values
+- Usage examples if applicable
+
+Code:
+{{code}}`,
 });
 
 const generateDocumentationFlow = ai.defineFlow<

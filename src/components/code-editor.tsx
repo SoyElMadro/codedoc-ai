@@ -36,7 +36,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   };
 
   return (
-    <div className={`w-full h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] ${className}`}>  
+    <div className={`w-full h-full min-h-[300px] ${className}`}>  
       <MonacoEditor
         className="border rounded-lg overflow-hidden"
         width="100%"
